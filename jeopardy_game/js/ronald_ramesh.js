@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log(response)
 
             for ( question  of response )   {
-                Create_Div( id )
+                Create_Div( question )
             }
         }
         HTTP.send()
