@@ -148,14 +148,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         function categories() {
 
+            // THIS IS FOR THE RANDOM CATEGORY
             // count = 6, minValue = 1, maxValue = 500
-            const randomValues = getRandomCategory(6, 1, 500);
+            const randomValues = getRandomCategory(6, 1, 1000);
 
-            function getRandomCategory(count, minValue, maxValue) {
+            function getRandomCategory( count, minValue, maxValue ) {
                 const randomValues = [];
 
-                for (let i = 0; i < count; i++) {
-                    const randomValue = Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
+                for ( let i = 0; i < count; i++ ) {
+                    const randomValue = Math.floor( Math.random() * (maxValue - minValue + 1 ) ) + minValue;
                     randomValues.push(randomValue);
                 }
 
@@ -175,16 +176,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 HTTP.onload = () => {
                     let response = JSON.parse(HTTP.responseText);
                     // console.log(response.title);
-                    console.log(response);
-                  
+                    console.log(response.clues);
+
                     if (response.clues && Array.isArray(response.clues)) {
-                        Create_Div( response ); // Pass the title to the Create_Div function
+                        Create_Div(response); // Pass the title to the Create_Div function
                     } else {
-                      console.log("Invalid response or missing clues property.");
+                        console.log("Invalid response or missing clues property.");
                     }
-                  }
-                  HTTP.send();
-                  
+                }
+                HTTP.send();
+
 
                 // HTTP.onload = () => {
 
@@ -209,14 +210,48 @@ document.addEventListener("DOMContentLoaded", () => {
             divNum.innerHTML = Data.title + " Category"
             divGameBoard.appendChild(divNum);
 
-            // Get_Question();
+            Get_Question()
 
-            let btnQuestion = document.createElement ( "button" )
-            btnQuestion.id = "button-question"
-            btnQuestion.classList.add( "button-question" )
-            // btnQuestion.innerHTML = "100"
-            btnQuestion.innerHTML = Data.value
-            divNum.appendChild( btnQuestion );
+        }
+
+        function Get_Question() {
+
+            // = = = = = = = = = THIS IS FOR THE RANDOM QUESTION EACH CATEGORY
+        // count = howManyQ, minValue = 3, maxValue = 6
+        // inputCateg.id = "inputCategory"
+        let howManyQ = document.getElementById ( "inputCategory" )
+
+        // const randomQ = getRandomQuestions( 6, 3, 5 );
+
+        // function getRandomQuestions( count, minValue, maxValue ) {
+        //     const randomQ = [];
+
+            for (let i = 0; i < howManyQ; i++) {
+
+                let btnQuestion = document.createElement("button")
+                btnQuestion.id = "button-question"
+                btnQuestion.classList.add("button-question")
+                // btnQuestion.innerHTML = "100"
+                btnQuestion.innerHTML = Data.value
+                divNum.appendChild(btnQuestion);
+
+            }
+
+        //         const randomQValue = Math.floor( Math.random() * (maxValue - minValue + 1 ) ) + minValue;
+        //         randomQ.push(randomQValue);
+
+        //     }
+
+        //     return randomQ;
+        // }
+        // console.log("Question : " + randomQ);
+
+            // let btnQuestion = document.createElement("button")
+            // btnQuestion.id = "button-question"
+            // btnQuestion.classList.add("button-question")
+            // // btnQuestion.innerHTML = "100"
+            // btnQuestion.innerHTML = Data.value
+            // divNum.appendChild(btnQuestion);
 
         }
 
@@ -231,7 +266,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // }
 
-        
+
 
 
 
