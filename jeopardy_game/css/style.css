@@ -59,8 +59,11 @@ div.divBBoard   {
 }
 
 div.divGBoard   {
+    display: flex;
+    align-items: flex-start;
+
     background: transparent;
-    width: 500px;
+    width: 900px;
     height: 500px;
     margin: 2%;
 
@@ -68,6 +71,32 @@ div.divGBoard   {
     border-color: white;
 
     color: white;
+}
+
+div.divNumber   {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    width: 150px;
+    height: 430px;
+
+    border-style: solid;
+    border-color: white;
+
+    text-align: center;
+}
+
+button.button-question  {
+    color: white;
+    background-color: #22277A;
+
+    height: 90px;
+    width: 120px;
+
+    padding: 0%;
+    
 }
 
 h2.h3StudName {
@@ -87,7 +116,7 @@ input.inputCategory {
     font-size: 20px;
 }
 
-button.buttonSubmit {
+button.buttonSubmit, .button-question {
     border: none;
     color: white;
     padding: 10px 30px;
