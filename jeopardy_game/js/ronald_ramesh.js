@@ -204,57 +204,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
         function Create_Div(Data) {
 
+            let divAll = document.createElement ( "div" )
+            divAll.id = "divAll"
+            divAll.classList.add("divAll");
+            divGameBoard.appendChild(divAll);
+
             let divNum = document.createElement("div");
             divNum.id = "divNumber";
             divNum.classList.add("divNumber");
-            divNum.innerHTML = Data.title + " Category"
-            divGameBoard.appendChild(divNum);
+            divNum.innerHTML = Data.title + "\nCategory"
+            divAll.appendChild(divNum);
 
-            Get_Question()
+            let divButtonQ = document.createElement("div");
+            divButtonQ.id = "divButtonQuestion";
+            divButtonQ.classList.add("divButtonQuestion");
+            divAll.appendChild(divButtonQ);
 
-        }
+            // THIS IF FOR THE QTY OF BOUTTON CORRESPONDING OF QUESTIONS
+            Make_btnQuestion()
 
-        function Get_Question() {
+            function Make_btnQuestion() {
 
-            // = = = = = = = = = THIS IS FOR THE RANDOM QUESTION EACH CATEGORY
-        // count = howManyQ, minValue = 3, maxValue = 6
-        // inputCateg.id = "inputCategory"
-        let Q = document.getElementById ( "inputCategory" )
-        // let howManyQ = new inputCateg;
-
-        // const randomQ = getRandomQuestions( 6, 3, 5 );
-
-        // function getRandomQuestions( count, minValue, maxValue ) {
-        //     const randomQ = [];
-
-            for (let i = 0; i < Q; i++) {
-
-                let btnQuestion = document.createElement("button")
-                btnQuestion.id = "button-question"
-                btnQuestion.classList.add("button-question")
-                // btnQuestion.innerHTML = "100"
-                btnQuestion.innerHTML = Data.value
-                divNum.appendChild(btnQuestion);
-
+            let Q = document.getElementById ( "inputCategory" ).value
+                
+                for (let i = 0; i < Q; i++) {
+    
+                    let btnQuestion = document.createElement("button")
+                    btnQuestion.id = "button-question"
+                    btnQuestion.classList.add("button-question")
+                    btnQuestion.innerHTML = "100"
+                    // btnQuestion.innerHTML = Data.value
+                    divButtonQ.appendChild(btnQuestion);
+                    
+    
+                }    
             }
-
-        //         const randomQValue = Math.floor( Math.random() * (maxValue - minValue + 1 ) ) + minValue;
-        //         randomQ.push(randomQValue);
-
-        //     }
-
-        //     return randomQ;
-        // }
-        // console.log("Question : " + randomQ);
-
-            // let btnQuestion = document.createElement("button")
-            // btnQuestion.id = "button-question"
-            // btnQuestion.classList.add("button-question")
-            // // btnQuestion.innerHTML = "100"
-            // btnQuestion.innerHTML = Data.value
-            // divNum.appendChild(btnQuestion);
-
         }
+
+        
 
         // function Get_Question() {
 
@@ -266,12 +253,6 @@ document.addEventListener("DOMContentLoaded", () => {
         //     divNum.appendChild( btnQuestion );
 
         // }
-
-
-
-
-
-
 
         // function categories() {
 

@@ -80,23 +80,36 @@ div.divNumber   {
     flex-direction: column;
 
     width: 150px;
-    height: 430px;
+    height: 90px;
 
-    border-style: solid;
-    border-color: white;
+    /* border-style: solid;
+    border-color: white; */
 
     text-align: center;
+}
+
+div.divAll  {
+    display: flex;
+    flex-direction: column;
 }
 
 button.button-question  {
     color: white;
     background-color: #22277A;
 
-    height: 90px;
+    height: 70px;
     width: 120px;
 
     padding: 0%;
     
+}
+
+div.divButtonQuestion   {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+
 }
 
 h2.h3StudName {
@@ -127,4 +140,6 @@ button.buttonSubmit, .button-question {
     margin: 4px 2px;
     cursor: pointer;
     background-color: #22277A;
+
+
 }
