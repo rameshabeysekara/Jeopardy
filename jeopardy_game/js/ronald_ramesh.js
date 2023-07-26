@@ -209,18 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
             divNum.innerHTML = Data.title + " Category"
             divGameBoard.appendChild(divNum);
 
-            Get_Question();
-
-            // let btnQuestion = document.createElement ( "button" )
-            // btnQuestion.id = "button-question"
-            // btnQuestion.classList.add( "button-question" )
-            // // btnQuestion.innerHTML = "100"
-            // btnQuestion.innerHTML = Data.value
-            // divNum.appendChild( btnQuestion );
-
-        }
-
-        function Get_Question() {
+            // Get_Question();
 
             let btnQuestion = document.createElement ( "button" )
             btnQuestion.id = "button-question"
@@ -230,6 +219,17 @@ document.addEventListener("DOMContentLoaded", () => {
             divNum.appendChild( btnQuestion );
 
         }
+
+        // function Get_Question() {
+
+        //     let btnQuestion = document.createElement ( "button" )
+        //     btnQuestion.id = "button-question"
+        //     btnQuestion.classList.add( "button-question" )
+        //     // btnQuestion.innerHTML = "100"
+        //     btnQuestion.innerHTML = Data.value
+        //     divNum.appendChild( btnQuestion );
+
+        // }
 
         
 
