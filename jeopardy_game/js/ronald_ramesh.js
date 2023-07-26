@@ -219,14 +219,15 @@ document.addEventListener("DOMContentLoaded", () => {
             // = = = = = = = = = THIS IS FOR THE RANDOM QUESTION EACH CATEGORY
         // count = howManyQ, minValue = 3, maxValue = 6
         // inputCateg.id = "inputCategory"
-        let howManyQ = document.getElementById ( "inputCategory" )
+        let Q = document.getElementById ( "inputCategory" )
+        // let howManyQ = new inputCateg;
 
         // const randomQ = getRandomQuestions( 6, 3, 5 );
 
         // function getRandomQuestions( count, minValue, maxValue ) {
         //     const randomQ = [];
 
-            for (let i = 0; i < howManyQ; i++) {
+            for (let i = 0; i < Q; i++) {
 
                 let btnQuestion = document.createElement("button")
                 btnQuestion.id = "button-question"
