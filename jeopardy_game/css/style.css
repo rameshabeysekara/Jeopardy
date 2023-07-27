@@ -28,7 +28,7 @@ div.divSecondSection {
 div.divThirdSection {
     display: flex;
     padding: 1%;
-    height: 200px;
+    height: 70px;
 
     flex-direction: column;
     align-items: center;
@@ -46,7 +46,7 @@ div.divSecondSectionRight {
     justify-content: center;
 }
 
-div.divBBoard   {
+div.divBBoard {
     width: 100%;
     height: 100%;
     background-image: url("../assets/bg.png");
@@ -56,9 +56,10 @@ div.divBBoard   {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
-div.divGBoard   {
+div.divGBoard {
     display: flex;
     align-items: flex-start;
 
@@ -73,7 +74,7 @@ div.divGBoard   {
     color: white;
 }
 
-div.divNumber   {
+div.divNumber {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -88,12 +89,12 @@ div.divNumber   {
     text-align: center;
 }
 
-div.divAll  {
+div.divAll {
     display: flex;
     flex-direction: column;
 }
 
-button.button-question  {
+button.button-question {
     color: white;
     background-color: #22277A;
 
@@ -101,15 +102,25 @@ button.button-question  {
     width: 120px;
 
     padding: 0%;
-    
+
 }
 
-div.divButtonQuestion   {
+div.divButtonQuestion {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
 
+}
+
+div.div-get-answer  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.div-Player  {
+    display: flex;
 }
 
 h2.h3StudName {
@@ -129,7 +140,12 @@ input.inputCategory {
     font-size: 20px;
 }
 
-button.buttonSubmit, .button-question {
+button.buttonSubmit,
+.button-question,
+.button-ans,
+.buttonReset,
+.button-player-one,
+.button-player-two {
     border: none;
     color: white;
     padding: 10px 30px;
@@ -140,6 +156,156 @@ button.buttonSubmit, .button-question {
     margin: 4px 2px;
     cursor: pointer;
     background-color: #22277A;
+}
+
+.buttonReset {
+    background-color: #470001;
+    margin-bottom: 5%;
+}
+
+.button-player-one  {
+    background-color: #889F77;
+}
+
+.button-player-two  {
+    background-color: #588061;
+}
 
 
+/* -=MODAL STYLE=- */
+
+/* The Modal (background) */
+div.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Modal Content */
+div.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border-radius: 25px;
+    /* border: 1px solid #888; */
+    width: 50%;
+    
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {
+        top: -500px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+@keyframes animatetop {
+    from {
+        top: -500px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+div.modal-header {
+    padding: 2px 16px;
+    background-color: #0F4C81;
+    color: white;
+}
+
+div.modal-BandA   {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.modal-body {
+    display: flex;
+    justify-content: center;
+
+    padding: 2px 16px;
+    font-size: 3rem;
+
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+div.modal-answer {
+    display: flex;
+    justify-content: center;
+
+    padding: 2px 16px;
+    font-size: 3rem;
+    background-color: #7fff00;
+
+    width: 50%;
+
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+div.modal-footer {
+    padding: 2px 16px;
+    background-color: #0F4C81;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+
+    font-size: 24px;
+    text-align: center;
+    padding: 20px;
+}
+
+button.button-ans   {
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 4px 2px;
+    cursor: pointer;
+    background-color: #22277A;
 }
