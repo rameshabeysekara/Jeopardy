@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let divNum = document.createElement("div");
             divNum.id = "divNumber";
             divNum.classList.add("divNumber");
-            divNum.innerHTML = Data.title + "\nCategory"
+            divNum.innerHTML = Data.title + "<br>Category"
             divAll.appendChild(divNum);
 
             let divButtonQ = document.createElement("div");
