@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
           let btnQuestion = document.createElement("button");
           btnQuestion.id = "button-question";
           btnQuestion.classList.add("button-question");
-          btnQuestion.innerHTML = "100";
+          btnQuestion.innerHTML = question.value ? question.value : 0;
           const elem = document.getElementById(id);
           elem.appendChild(btnQuestion);
 
