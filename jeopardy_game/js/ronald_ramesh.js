@@ -131,12 +131,8 @@ document.addEventListener("DOMContentLoaded", () => {
     location.reload();
   });
 
-  // const JEOPARDY_API = "https://jservice.io/api/category"
-
-  // https://jservice.io/api/category?id=1500
   const JEOPARDY_API_CATEGORIES = "https://jservice.io/api/categories";
-
-  var HTTP = new XMLHttpRequest();
+  const JEOPARDY_API_CLUES = "https://jservice.io/api/clues";
 
   btnSubmit.addEventListener("click", categQuestions);
 
@@ -145,195 +141,173 @@ document.addEventListener("DOMContentLoaded", () => {
     divSecondSec.style.display = "none";
     divThirdSec.style.display = "none";
 
-    function categories() {
-      // // THIS IS FOR THE RANDOM CATEGORY
-      // // count = 6, minValue = 1, maxValue = 500
-      // const randomValues = getRandomCategory(6, 1, 1000)
-
-      // function getRandomCategory(count, minValue, maxValue) {
-      //     const randomValues = [];
-
-      //     for (let i = 0; i < count; i++) {
-      //         const randomValue = Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
-      //         randomValues.push(randomValue)
-      //     }
-
-      //     return randomValues;
-      // }
-      // // console.log(randomValues);
-
-      // for (let value of randomValues) {
-
-      //     // console.log("Category ID:" + value)
-
-      //     const URL = `${JEOPARDY_API_CATEG}?id=${value}`;
-
-      //     const HTTP = new XMLHttpRequest();
-      //     HTTP.open("GET", URL, true);
-
-      //     HTTP.onload = () => {
-      //         let response = JSON.parse(HTTP.responseText);
-      //         // console.log(response.title);
-      //         console.log(response.clues);
-
-      //         if (response.clues && Array.isArray(response.clues)) {
-      //             Create_Div(response); // Pass the title to the Create_Div function
-      //         } else {
-      //             console.log("Invalid response or missing clues property.")
-      //         }
-      //     }
-      //     HTTP.send();
-      // }
-      const URL = `${JEOPARDY_API_CATEGORIES}?count=5`;
-      const HTTP = new XMLHttpRequest();
-      HTTP.open("GET", URL, true);
-
-      HTTP.onload = () => {
-        let response = JSON.parse(HTTP.responseText);
-        if (Array.isArray(response)) {
-          if (response.length > 0) {
-            response.forEach((element) => {
-              Create_Div(element);
-            });
-          }
-        } else {
-          console.log("Invalid response or missing clues property.");
+    function createCategoriesTabs(categories) {
+      if (Array.isArray(categories)) {
+        if (categories.length > 0) {
+          categories.forEach((category) => {
+            createCategoryDivs(category);
+            getQuestions(category);
+          });
         }
-      };
-      HTTP.send();
+      }
     }
 
-    categories();
+    async function getQuestions(category) {
+      const URL = `${JEOPARDY_API_CLUES}?category=${category?.id}`;
+      const questionsResponse = await fetch(URL)
+        .then((response) => response.json())
+        .catch((error) => console.log(error));
+      createQuestionDivs(category?.id, questionsResponse);
+    }
 
-    function Create_Div(Data) {
+    async function loadData() {
+      const URL = `${JEOPARDY_API_CATEGORIES}?count=5`;
+      const categoriesResponse = await fetch(URL)
+        .then((response) => response.json())
+        .catch((error) => console.log(error));
+
+      const categories = categoriesResponse;
+      if (categories) {
+        createCategoriesTabs(categories);
+      }
+    }
+
+    loadData();
+
+    function createCategoryDivs(category) {
       let divAll = document.createElement("div");
       divAll.id = "divAll";
       divAll.classList.add("divAll");
       divGameBoard.appendChild(divAll);
 
-      let divNum = document.createElement("div");
-      divNum.id = "divNumber";
-      divNum.classList.add("divNumber");
-      divNum.innerHTML = Data.title + "<br>Category";
-      divAll.appendChild(divNum);
+      let divCategory = document.createElement("div");
+      divCategory.id = category.title;
+      divCategory.classList.add("divNumber");
+      divCategory.innerHTML = category.title + "<br>Category";
+      divAll.appendChild(divCategory);
 
       let divButtonQ = document.createElement("div");
-      divButtonQ.id = "divButtonQuestion";
+      divButtonQ.id = category.id;
       divButtonQ.classList.add("divButtonQuestion");
       divAll.appendChild(divButtonQ);
+    }
 
-      // Loop to create buttons
-      for (let i = 0; i < 5; i++) {
-        let btnQuestion = document.createElement("button");
-        btnQuestion.id = "button-question";
-        btnQuestion.classList.add("button-question");
-        btnQuestion.innerHTML = "100";
-        divButtonQ.appendChild(btnQuestion);
+    function createQuestionDivs(id, questions) {
+      if (questions.length >= 5) {
+        questions.slice(0, 5).forEach((question) => {
+          console.log(question);
+          let btnQuestion = document.createElement("button");
+          btnQuestion.id = "button-question";
+          btnQuestion.classList.add("button-question");
+          btnQuestion.innerHTML = "100";
+          const elem = document.getElementById(id);
+          elem.appendChild(btnQuestion);
 
-        // Add event listener to show modal when button is clicked
-        btnQuestion.addEventListener("click", function () {
-          // Create the modal and its content
-          let modal = document.createElement("div");
-          modal.classList.add("modal");
-          modal.style.display = "block";
+          // Add event listener to show modal when button is clicked
+          btnQuestion.addEventListener("click", function () {
+            // Create the modal and its content
+            let modal = document.createElement("div");
+            modal.classList.add("modal");
+            modal.style.display = "block";
 
-          let modalContent = document.createElement("div");
-          modalContent.classList.add("modal-content");
-          // modalContent.innerHTML = "This is the modal content for button " + (i + 1);
+            let modalContent = document.createElement("div");
+            modalContent.classList.add("modal-content");
+            // modalContent.innerHTML = "This is the modal content for button " + (i + 1);
 
-          let divModalHeader = document.createElement("div");
-          divModalHeader.classList.add("modal-header");
-          let modalH2 = document.createElement("h2");
-          modalH2.innerHTML = "Category :\t" + Data.title;
+            let divModalHeader = document.createElement("div");
+            divModalHeader.classList.add("modal-header");
+            let modalH2 = document.createElement("h2");
+            modalH2.innerHTML = "Category :\t" + question.category.title;
 
-          let divModOfBandA = document.createElement("div");
-          divModOfBandA.classList.add("modal-BandA");
-          // divModOfQandA.innerHTML = "Here is the Question!";
+            let divModOfBandA = document.createElement("div");
+            divModOfBandA.classList.add("modal-BandA");
+            // divModOfQandA.innerHTML = "Here is the Question!";
 
-          let divModalBody = document.createElement("div");
-          divModalBody.classList.add("modal-body");
-          divModalBody.innerHTML = "Here is the Question!";
+            let divModalBody = document.createElement("div");
+            divModalBody.classList.add("modal-body");
+            divModalBody.innerHTML = question.question;
 
-          let divModalAns = document.createElement("div");
-          divModalAns.classList.add("modal-answer");
-          divModalAns.innerHTML = "Here is the ANSWER!";
-          divModalAns.style.display = "none";
+            let divModalAns = document.createElement("div");
+            divModalAns.classList.add("modal-answer");
+            divModalAns.innerHTML = question.answer;
+            divModalAns.style.display = "none";
 
-          let divModalFooter = document.createElement("div");
-          divModalFooter.id = "modal-foot";
-          divModalFooter.classList.add("modal-footer");
-          // divModalFooter.innerHTML = "Here is the Footer of Modal";
+            let divModalFooter = document.createElement("div");
+            divModalFooter.id = "modal-foot";
+            divModalFooter.classList.add("modal-footer");
+            // divModalFooter.innerHTML = "Here is the Footer of Modal";
 
-          let countdownValue = 3;
+            let countdownValue = 3;
 
-          function updateCountdown() {
-            divModalFooter.textContent = countdownValue;
+            function updateCountdown() {
+              divModalFooter.textContent = countdownValue;
 
-            countdownValue--;
+              countdownValue--;
 
-            if (countdownValue < 0) {
-              clearInterval(intervalId);
-              divModalFooter.textContent = "";
+              if (countdownValue < 0) {
+                clearInterval(intervalId);
+                divModalFooter.textContent = "";
 
-              let btnAns = document.createElement("button");
-              btnAns.id = "button-answer";
-              btnAns.classList.add("button-ans");
-              divModalFooter.appendChild(btnAns);
-              btnAns.innerHTML = "REVEAL THE ANSWER!";
+                let btnAns = document.createElement("button");
+                btnAns.id = "button-answer";
+                btnAns.classList.add("button-ans");
+                divModalFooter.appendChild(btnAns);
+                btnAns.innerHTML = "REVEAL THE ANSWER!";
 
-              btnAns.addEventListener("click", function () {
-                divModalAns.style.display = "";
-                whoGetAns.style.display = "";
-                btnAns.style.display = "none";
-              });
+                btnAns.addEventListener("click", function () {
+                  divModalAns.style.display = "";
+                  whoGetAns.style.display = "";
+                  btnAns.style.display = "none";
+                });
 
-              let whoGetAns = document.createElement("div");
-              whoGetAns.id = "div-get-ans";
-              whoGetAns.classList.add("div-get-answer");
-              whoGetAns.style.display = "none";
-              whoGetAns.innerHTML = "Who get the correct answer?";
+                let whoGetAns = document.createElement("div");
+                whoGetAns.id = "div-get-ans";
+                whoGetAns.classList.add("div-get-answer");
+                whoGetAns.style.display = "none";
+                whoGetAns.innerHTML = "Who get the correct answer?";
 
-              let divPlayer = document.createElement("div");
-              divPlayer.classList.add("div-Player");
+                let divPlayer = document.createElement("div");
+                divPlayer.classList.add("div-Player");
 
-              let btnP1 = document.createElement("button");
-              btnP1.id = "button-p1";
-              btnP1.classList.add("button-player-one");
-              btnP1.innerHTML = "PLAYER 1";
-              // whoGetAns.appendChild(btnP1)
-              btnP1.addEventListener("click", sharedFunction);
+                let btnP1 = document.createElement("button");
+                btnP1.id = "button-p1";
+                btnP1.classList.add("button-player-one");
+                btnP1.innerHTML = "PLAYER 1";
+                // whoGetAns.appendChild(btnP1)
+                btnP1.addEventListener("click", sharedFunction);
 
-              let btnP2 = document.createElement("button");
-              btnP2.id = "button-p2";
-              btnP2.classList.add("button-player-two");
-              btnP2.innerHTML = "PLAYER 2";
-              // whoGetAns.appendChild(btnP2)
+                let btnP2 = document.createElement("button");
+                btnP2.id = "button-p2";
+                btnP2.classList.add("button-player-two");
+                btnP2.innerHTML = "PLAYER 2";
+                // whoGetAns.appendChild(btnP2)
 
-              divModalFooter.appendChild(whoGetAns);
-              whoGetAns.appendChild(divPlayer);
-              divPlayer.appendChild(btnP1);
-              divPlayer.appendChild(btnP2);
-              btnP2.addEventListener("click", sharedFunction);
+                divModalFooter.appendChild(whoGetAns);
+                whoGetAns.appendChild(divPlayer);
+                divPlayer.appendChild(btnP1);
+                divPlayer.appendChild(btnP2);
+                btnP2.addEventListener("click", sharedFunction);
 
-              function sharedFunction() {
-                // Do something when the button is clicked
-                // console.log("Button clicked!");
-                modal.style.display = "none";
+                function sharedFunction() {
+                  // Do something when the button is clicked
+                  // console.log("Button clicked!");
+                  modal.style.display = "none";
+                }
               }
             }
-          }
-          const intervalId = setInterval(updateCountdown, 1000);
+            const intervalId = setInterval(updateCountdown, 1000);
 
-          document.body.appendChild(modal);
-          modal.appendChild(modalContent);
-          divModalHeader.appendChild(modalH2);
-          modalContent.appendChild(divModalHeader);
-          modalContent.appendChild(divModOfBandA);
-          divModOfBandA.appendChild(divModalBody);
-          divModOfBandA.appendChild(divModalAns);
-          modalContent.appendChild(divModalFooter);
+            document.body.appendChild(modal);
+            modal.appendChild(modalContent);
+            divModalHeader.appendChild(modalH2);
+            modalContent.appendChild(divModalHeader);
+            modalContent.appendChild(divModOfBandA);
+            divModOfBandA.appendChild(divModalBody);
+            divModOfBandA.appendChild(divModalAns);
+            modalContent.appendChild(divModalFooter);
 
-          modal.style.display = "block";
+            modal.style.display = "block";
+          });
         });
       }
     }
