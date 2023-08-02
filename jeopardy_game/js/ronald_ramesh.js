@@ -111,17 +111,51 @@ document.addEventListener("DOMContentLoaded", () => {
   divBaseBoard.style.display = "none";
   document.body.appendChild(divBaseBoard);
 
+  let divBaseBoardUpper = document.createElement( "div" )
+  divBaseBoardUpper.id = "divUpper"
+  divBaseBoardUpper.classList.add ("divUpper")
+  divBaseBoard.appendChild(divBaseBoardUpper)
+
+  let divPlayerOneLeft = document.createElement( "div" )
+  divPlayerOneLeft.id + "divPlayerLeft"
+  divPlayerOneLeft.classList.add ( "divPlayer" )
+  divPlayerOneLeft.innerHTML = "PLAYER 1"
+  divBaseBoardUpper.appendChild(divPlayerOneLeft)
+
+  let labelPlayerOneScore = document.createElement ( "labe" )
+  labelPlayerOneScore.id = "lblPlayer1Score"
+  labelPlayerOneScore.classList.add ( "playerScore" )
+  labelPlayerOneScore.innerHTML = "00"
+  divPlayerOneLeft.appendChild(labelPlayerOneScore)
+
+  
   let divGameBoard = document.createElement("div");
   divGameBoard.id = "divGBoard";
   divGameBoard.classList.add("divGBoard");
-  divBaseBoard.appendChild(divGameBoard);
+  divBaseBoardUpper.appendChild(divGameBoard);
   // divGameBoard.innerHTML = "THIS IS IT!"
+
+  let divPlayerTwoRight = document.createElement( "div" )
+  divPlayerTwoRight.id + "divPlayerRight"
+  divPlayerTwoRight.classList.add ( "divPlayer" )
+  divPlayerTwoRight.innerHTML = "PLAYER 2"
+  divBaseBoardUpper.appendChild(divPlayerTwoRight)
+
+  let labelPlayerTwoScore = document.createElement ( "labe" )
+  labelPlayerTwoScore.id = "lblPlayer1Score"
+  labelPlayerTwoScore.classList.add ( "playerScore" )
+  labelPlayerTwoScore.innerHTML = "00"
+  divPlayerTwoRight.appendChild(labelPlayerTwoScore)
+
+  let divBaseBoardBottom = document.createElement( "div" )
+  divBaseBoardBottom.id = "divBottom"
+  divBaseBoard.appendChild(divBaseBoardBottom)
 
   let btnReset = document.createElement("button");
   btnReset.id = "buttonReset";
   btnReset.classList.add("buttonReset");
   btnReset.textContent = "Reset Game";
-  divBaseBoard.appendChild(btnReset);
+  divBaseBoardBottom.appendChild(btnReset);
 
   btnReset.addEventListener("click", function () {
     divSecondSec.style.display = "";

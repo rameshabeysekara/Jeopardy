@@ -59,6 +59,11 @@ div.divBBoard {
     flex-direction: column;
 }
 
+div.divUpper    {
+    display: flex;
+    align-items: center;
+}
+
 div.divGBoard {
     display: flex;
     align-items: flex-start;
@@ -67,12 +72,33 @@ div.divGBoard {
     background: transparent;
     width: 900px;
     height: 500px;
-    margin: 2%;
+    margin: .5%;
 
     border-style: solid;
     border-color: white;
 
     color: white;
+}
+
+div.divPlayer   {
+    border-style: solid;
+    border-color: white;
+
+    color: white;
+    font-size: larger;
+    font-weight: 100;
+
+    width: 200px;
+    height: 250px;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.playerScore {
+font-size: 5em;
 }
 
 div.divNumber {
