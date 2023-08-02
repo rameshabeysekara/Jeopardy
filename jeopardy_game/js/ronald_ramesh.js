@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let btnSubmit = document.createElement("button");
   btnSubmit.id = "buttonSubmit";
   btnSubmit.classList.add("buttonSubmit");
-  btnSubmit.textContent = "START GAME !";
+  btnSubmit.textContent = "START GAME!";
   divThirdSec.appendChild(btnSubmit);
 
   //= = = = = THIS IS THE PART!!
@@ -134,25 +134,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const JEOPARDY_API_CATEGORIES = "https://jservice.io/api/categories";
   const JEOPARDY_API_CLUES = "https://jservice.io/api/clues";
 
-  btnSubmit.addEventListener("click", categQuestions);
+  btnSubmit.addEventListener( "click", categQuestions );
 
   function categQuestions() {
     divBaseBoard.style.display = "";
     divSecondSec.style.display = "none";
     divThirdSec.style.display = "none";
 
-    function createCategoriesTabs(categories) {
-      if (Array.isArray(categories)) {
-        if (categories.length > 0) {
-          categories.forEach((category) => {
-            createCategoryDivs(category);
-            getQuestions(category);
-          });
+    function createCategoriesTabs(  categories  ) {
+
+      if (  Array.isArray(  categories  ) ) {
+      
+        if (  categories.length > 0 ) {
+      
+          categories.forEach( ( category  ) => { createCategoryDivs(  category  ); getQuestions(  category  ); }  );
+
         }
       }
     }
 
-    async function getQuestions(category) {
+    async function getQuestions( category ) {
+
       const URL = `${JEOPARDY_API_CLUES}?category=${category?.id}`;
       const questionsResponse = await fetch(URL)
         .then((response) => response.json())
@@ -161,6 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     async function loadData() {
+
       const URL = `${JEOPARDY_API_CATEGORIES}?count=5`;
       const categoriesResponse = await fetch(URL)
         .then((response) => response.json())
