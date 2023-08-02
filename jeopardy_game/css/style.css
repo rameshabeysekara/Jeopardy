@@ -62,6 +62,7 @@ div.divBBoard {
 div.divGBoard {
     display: flex;
     align-items: flex-start;
+    justify-content: center;
 
     background: transparent;
     width: 900px;
