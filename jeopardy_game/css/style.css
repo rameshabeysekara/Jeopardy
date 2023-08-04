@@ -278,6 +278,9 @@ div.modal-header {
     padding: 2px 16px;
     background-color: #0F4C81;
     color: white;
+
+    display: flex;
+    justify-content: space-between;
 }
 
 div.modal-BandA   {
@@ -335,4 +338,8 @@ button.button-ans   {
     margin: 4px 2px;
     cursor: pointer;
     background-color: #22277A;
+}
+
+.buttonClicked  {
+    background-color: #777B7E;
 }
