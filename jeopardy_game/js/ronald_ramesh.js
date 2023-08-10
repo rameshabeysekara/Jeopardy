@@ -212,6 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       } catch (error) {
         console.error("Error in getting data:", error);
+        alert("Error in getting data, please reload the page and try again");
       }
     }
 
@@ -249,6 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       } catch (error) {
         console.error("Error in getting data:", error);
+        alert("Error in getting data, please RELOAD the page and try again");
       }
     }
 
