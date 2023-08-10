@@ -275,15 +275,23 @@ document.addEventListener("DOMContentLoaded", () => {
     let playerOneScore = 0;
     let playerTwoScore = 0;
 
+    function hasNull(element) {
+      return element.value === null;
+    }
+
     function createQuestionDivs(id, questions) {
       if (questions.length >= 5) {
-        questions.slice(0, 5).forEach((question) => {
-          console.log(question.value);
-
+        let selectedQuestions = questions.slice(0, 5);
+        while (selectedQuestions.some(hasNull)) {
+          selectedQuestions = questions
+            .sort(() => Math.random() - Math.random())
+            .slice(0, 5);
+        }
+        selectedQuestions.forEach((question) => {
           let btnQuestion = document.createElement("button");
           btnQuestion.id = "button-question";
           btnQuestion.classList.add("button-question");
-          btnQuestion.innerHTML = question.value ? question.value : 100;
+          btnQuestion.innerHTML = question.value;
           const elem = document.getElementById(id);
           elem.appendChild(btnQuestion);
 
